@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FormsEncodedData.InventoryService" Factory="FormsEncodedData.InventoryServiceFactory" CodeBehind="InventoryService.svc.cs" %>

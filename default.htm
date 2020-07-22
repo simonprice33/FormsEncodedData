@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="Scripts/jquery-1.7.2.js"></script>
+</head>
+<body>
+    <h1>Insert products</h1>
+    <form id='productInfo' action="default.htm">
+        <p>Name: <input type='text' id='name' /></p>
+        <p>Price: <input type='text' id='price' /></p>
+        <p>Quantity: <input type='text' id='quantity' /></p>
+        <p><input type="button" value="Submit" onclick="SubmitProduct();" /></p>
+    </form>
+    <div id='result'></div>
+
+    <script type="text/javascript">
+        function SubmitProduct() {
+            var url = "InventoryService.svc/InsertProduct";
+            var productInfo = {
+                Name: $("#name").val(),
+                Price: parseFloat($("#price").val()),
+                Quantity: parseFloat($("#quantity").val())
+            };
+            $.post(url, productInfo, function () {
+                var allProductsUrl = "InventoryService.svc/GetAllProducts";
+                $.get(allProductsUrl, function (result) {
+                    $("#result").text("There are " + result.length + " products in the inventory");
+                });
+            });
+        }
+    </script>
+</body>
+</html>
